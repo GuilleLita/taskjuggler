@@ -123,7 +123,7 @@ task WMGame "Web & Mobile Game" {
   task tbackDepl "Back End Deployment"{
     effort 6d
     allocate dev1
-    depends WMGame.tbackDev
+    depends WMGame.tback.tbackDev
     task tselcNube "Evaluacion y seleccion de la Nube a usar"{
       effort 2d
       allocate dev1
