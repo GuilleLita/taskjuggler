@@ -417,7 +417,7 @@ resourcereport resourceGraph "" {
 }
 
 resourcereport planInicial "" {
-  scenarios actual
+  scenarios plan
   headline "Plan Inicial"
   columns no, name, effort, rate, weekly { ${TaskTip} }
   loadunit shortauto
