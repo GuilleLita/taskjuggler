@@ -150,21 +150,6 @@ task WMGame "Web & Mobile Game" {
     purge chargeset
     chargeset mFront
     responsible dev2
-    depends WMGame.tback.tBEd
-    task tmGUId "Mobile GUI Design" {
-      effort 10d
-      allocate dev3
-    }
-    task tmFEc "Mobile Front End Construction" {
-      effort 17d
-      allocate dev2
-      depends WMGame.tmobileF.tmGUId
-    }
-    task tmFEt "Mobile Front End Test" {
-      effort 5d
-      allocate dev1
-      depends WMGame.tmobileF.tmFEc
-    }    
   }
   
 
