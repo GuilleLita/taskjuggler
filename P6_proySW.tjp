@@ -69,6 +69,10 @@ resource dev2 "Samantha Müller" {
 resource dev3 "Peter Green" {
   email "kkk@unizar.es"
 }
+resource dev4 "Guillermo Loscertales" {
+  email "775227@unizar.es"
+  workinghours [sun-sat] 4h
+}
 
 # Now we specify the work packages. The whole project is described as
 # a task that contains subtasks. These subtasks are then broken down
@@ -198,7 +202,7 @@ task WMGame "Web & Mobile Game" {
       allocate boss
       allocate dev2
       actual:effort 15d
-      maxstart 2023-05-01
+      minstart 2023-05-01
       journalentry 2023-04-13 "Problems with the planned dates" {
         author boss
         alert red
@@ -304,6 +308,13 @@ textreport frame "" {
     title "Resource Graph"
     center '<[report id="resourceGraph"]>'
   }
+
+  textreport "PlanInicial"{
+    formats html
+    title "Plan Inicial"
+    center '<[report id="planInicial"]>'
+
+  }
 }
 
 # A traditional Gantt chart with a project overview.
@@ -398,6 +409,16 @@ resourcereport contactList "" {
 resourcereport resourceGraph "" {
   scenarios actual
   headline "Current Resource Allocation Graph"
+  columns no, name, effort, rate, weekly { ${TaskTip} }
+  loadunit shortauto
+  # We only like to show leaf tasks for leaf resources.
+  hidetask ~(isleaf() & isleaf_())
+  sorttasks plan.start.up
+}
+
+resourcereport planInicial "" {
+  scenarios actual
+  headline "Plan Inicial"
   columns no, name, effort, rate, weekly { ${TaskTip} }
   loadunit shortauto
   # We only like to show leaf tasks for leaf resources.
