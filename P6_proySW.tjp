@@ -5,7 +5,7 @@
  * some elements of it
  */
 
-project pSix "Web Game"  2023-03-15 +2.5m {
+project pSix "Web Game"  2023-03-15 +4m {
   # Set the default time zone for the project. If not specified, UTC
   # is used.
   timezone "Europe/Paris"
@@ -19,7 +19,7 @@ project pSix "Web Game"  2023-03-15 +2.5m {
   # the project reports. If not specified, the current day will be
   # used, but this will likely be outside of the project range, so it
   # can't be seen in the reports.
-  now 2023-04-15-13:00
+  now 2023-04-28-15:00
   # The currency for all money values is the US Dollar.
   currency "EUR"
 
@@ -119,6 +119,27 @@ task WMGame "Web & Mobile Game" {
       depends WMGame.tback.tlogic
     }
   }
+
+  task tbackDepl "Back End Deployment"{
+    effort 6d
+    allocate dev1
+    depends WMGame.tbackDev
+    task tselcNube "Evaluacion y seleccion de la Nube a usar"{
+      effort 2d
+      allocate dev1
+      journalentry 2023-04-28 "Evaluacion de: AWS, Google cloud, Microsoft azure"{
+        author dev1
+        alert green
+        summary "De momento se plantea usar AWS"
+      }
+    }
+    task tdeploy "Despliegue en la nube"{
+      effort 4d
+      allocate dev1
+      depends WMGame.tbackDepl.tselcNube
+    }
+  }
+  
 
   task twebF "Web Front End" {
     purge chargeset
