@@ -307,6 +307,7 @@ taskreport status "" {
     sorttasks alert.down, actual.end.up
     period %{${now} - 3w} +3w
   }
+  
   taskreport completed "" {
     headline "Already completed tasks"
     hidetask ~(actual.end <= ${now})
