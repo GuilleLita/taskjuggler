@@ -71,7 +71,7 @@ resource dev3 "Peter Green" {
 }
 resource dev4 "Guillermo Loscertales" {
   email "775227@unizar.es"
-  workinghours sun-sat 4h
+  limits { dailymax 4h }
 }
 
 # Now we specify the work packages. The whole project is described as
@@ -128,20 +128,20 @@ task WMGame "Web & Mobile Game" {
   task tbackDepl "Back End Deployment"{
     purge chargeset
     chargeset backDepl
-    allocate dev1
+    allocate dev4
     depends WMGame.tback.tbackDev
     task tselcNube "Evaluacion y seleccion de la Nube a usar"{
       effort 2d
-      allocate dev1
+      allocate dev4
       journalentry 2023-04-28 "Evaluacion de: AWS, Google cloud, Microsoft azure"{
-        author dev1
+        author dev4
         alert green
         summary "De momento se plantea usar AWS"
       }
     }
     task tdeploy "Despliegue en la nube"{
       effort 4d
-      allocate dev1
+      allocate dev4
       depends WMGame.tbackDepl.tselcNube
     }
   }
