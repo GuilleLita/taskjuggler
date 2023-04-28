@@ -19,7 +19,7 @@ project pSix "Web Game"  2023-03-15 +2.5m {
   # the project reports. If not specified, the current day will be
   # used, but this will likely be outside of the project range, so it
   # can't be seen in the reports.
-  now 2023-04-28-15:00
+  now 2023-04-15-13:00
   # The currency for all money values is the US Dollar.
   currency "EUR"
 
@@ -119,8 +119,6 @@ task WMGame "Web & Mobile Game" {
     }
   }
 
-  
-
   task twebF "Web Front End" {
     purge chargeset
     chargeset wFront
@@ -147,15 +145,33 @@ task WMGame "Web & Mobile Game" {
       depends WMGame.twebF.tFEc
     }    
   }
-
-
+  
+  task tmobileF "Mobile Front End" {
+    purge chargeset
+    chargeset mFront
+    responsible dev2
+    depends WMGame.tback.tBEd
+    task tGUId "Mobile GUI Design" {
+      effort 10d
+      allocate dev3
+    }
+    task tFEc "Mobile Front End Construction" {
+      effort 17d
+      allocate dev2
+      depends WMGame.tmobileF.tGUId
+    }
+    task tFEt "Mobile Front End Test" {
+      effort 5d
+      allocate dev1
+      depends WMGame.tmobileF.tFEc
+    }    
+  }
 
   task ttest "Accpetance tests" {
       effort 10d
       allocate boss
       allocate dev2
       actual:effort 15d
-      maxstart 2023-06-01
       journalentry 2023-04-13 "Problems with the planned dates" {
         author boss
         alert red
